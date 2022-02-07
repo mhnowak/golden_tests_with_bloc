@@ -29,6 +29,11 @@ class MainPageRiverpodContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(latestRaceWinnersNotifierProvider, (previous, next) {
+      if (next is LatestRaceWinnersLoaded) {
+        print('Successfully loaded race winners');
+      }
+    });
     final state = ref.watch(latestRaceWinnersNotifierProvider);
 
     if (state is LatestRaceWinnersLoading) {
