@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:golden_tests_with_bloc/main_page.dart';
+import 'package:golden_tests_with_bloc/main_page_bloc.dart';
 import 'package:golden_tests_with_bloc/repositories/winners_repository.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MyBlocApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyBlocApp extends StatelessWidget {
+  const MyBlocApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData.light(),
-        home: const MainPage(),
+        home: const MainPageBloc(),
       ),
     );
   }

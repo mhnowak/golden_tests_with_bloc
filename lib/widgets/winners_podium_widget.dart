@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:golden_tests_with_bloc/widgets/my_network_image.dart';
 import 'package:golden_tests_with_bloc/widgets/podium_widgets.dart';
 import 'package:golden_tests_with_bloc/model/winners_model.dart';
 
@@ -7,9 +6,11 @@ class WinnersPodiumWidget extends StatelessWidget {
   const WinnersPodiumWidget({
     Key? key,
     required this.winnersModel,
+    this.onRefresh,
   }) : super(key: key);
 
   final WinnersModel winnersModel;
+  final VoidCallback? onRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +80,13 @@ class WinnersPodiumWidget extends StatelessWidget {
             ],
           ),
         ),
+        if (onRefresh != null) ...[
+          const SizedBox(height: 24),
+          TextButton(
+            onPressed: onRefresh,
+            child: const Text('REFRESH'),
+          ),
+        ],
         const Spacer(),
       ],
     );

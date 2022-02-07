@@ -1,10 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:golden_tests_with_bloc/cubit/latest_race_winners_cubit.dart';
-import 'package:golden_tests_with_bloc/main_page.dart';
-import 'package:golden_tests_with_bloc/model/winners_model.dart';
+import 'package:golden_tests_with_bloc/main_page_bloc.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mocktail/mocktail.dart';
+
+import 'mock_data.dart';
 
 class MockLatestRaceWinnersCubit extends MockCubit<LatestRaceWinnersState> implements LatestRaceWinnersCubit {}
 
@@ -33,7 +34,7 @@ void main() {
               initialState: const LatestRaceWinnersInitial(),
             );
 
-            return MainPage(cubit: mock);
+            return MainPageBloc(cubit: mock);
           },
         ),
       );
@@ -49,27 +50,12 @@ void main() {
                 const [
                   LatestRaceWinnersInitial(),
                   LatestRaceWinnersLoading(),
-                  LatestRaceWinnersLoaded(
-                    WinnersModel(
-                      firstPlace: Driver(
-                        firstName: 'Max',
-                        familyName: 'Verstappen',
-                      ),
-                      secondPlace: Driver(
-                        firstName: 'Lewis',
-                        familyName: 'Hamilton',
-                      ),
-                      thirdPlace: Driver(
-                        firstName: 'Carlos',
-                        familyName: 'Sainz',
-                      ),
-                    ),
-                  ),
+                  LatestRaceWinnersLoaded(winnersModel),
                 ],
               ),
               initialState: const LatestRaceWinnersInitial(),
             );
-            return MainPage(cubit: mock);
+            return MainPageBloc(cubit: mock);
           },
         ),
       );
@@ -90,15 +76,14 @@ void main() {
               ),
               initialState: const LatestRaceWinnersInitial(),
             );
-
-            return MainPage(cubit: mock);
+            return MainPageBloc(cubit: mock);
           },
         ),
       );
 
       await tester.pumpDeviceBuilder(builder);
 
-      await screenMatchesGolden(tester, 'main_page');
+      await screenMatchesGolden(tester, 'main_page_bloc');
     },
   );
 }
