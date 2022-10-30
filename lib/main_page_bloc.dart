@@ -6,8 +6,8 @@ import 'package:golden_tests_with_bloc/widgets/failure_widget.dart';
 import 'package:golden_tests_with_bloc/widgets/loading_widget.dart';
 import 'package:golden_tests_with_bloc/widgets/winners_podium_widget.dart';
 
-class MainPage extends StatelessWidget {
-  const MainPage({
+class MainPageBloc extends StatelessWidget {
+  const MainPageBloc({
     Key? key,
     @visibleForTesting this.cubit,
   }) : super(key: key);
@@ -18,13 +18,13 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => (cubit ?? LatestRaceWinnersCubit(RepositoryProvider.of<WinnersRepository>(context)))..load(),
-      child: const MainPageContent(),
+      child: const MainPageBlocContent(),
     );
   }
 }
 
-class MainPageContent extends StatelessWidget {
-  const MainPageContent({Key? key}) : super(key: key);
+class MainPageBlocContent extends StatelessWidget {
+  const MainPageBlocContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,12 @@ class MainPageContent extends StatelessWidget {
           } else if (state is LatestRaceWinnersFailure) {
             return const FailureWidget();
           } else if (state is LatestRaceWinnersLoaded) {
-            return WinnersPodiumWidget(winnersModel: state.raceWinners);
+            return WinnersPodiumWidget(
+              winnersModel: state.raceWinners,
+              onRefresh: () {
+                context.read<LatestRaceWinnersCubit>().load();
+              },
+            );
           } else {
             return const SizedBox.shrink();
           }
