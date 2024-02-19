@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:golden_tests_with_bloc/widgets/my_network_image.dart';
 import 'package:golden_tests_with_bloc/widgets/podium_widgets.dart';
 import 'package:golden_tests_with_bloc/model/winners_model.dart';
 

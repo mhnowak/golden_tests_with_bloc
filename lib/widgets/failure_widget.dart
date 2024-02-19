@@ -13,9 +13,9 @@ class FailureWidget extends StatelessWidget {
           color: Colors.red,
           shape: BoxShape.circle,
         ),
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Icon(
               Icons.warning,
               color: Colors.white,
